@@ -42,3 +42,14 @@ auth="password in however the server accepts it"
 Repeat the last three lines as many times as you'd like for different websites.
 
 The examples would be accessible at: `https://testcargo.com/mirror/examplerepo`
+
+
+### Troubleshooting
+
+If you're getting timeouts with big installs, you can edit `/usr/lib/systemd/system/fcgiwrap.service` to 
+```diff
+- ExecStart=/usr/sbin/fcgiwrap ${DAEMON_OPTS}
++ ExecStart=/usr/sbin/fcgiwrap -c6 ${DAEMON_OPTS}
+```
+This will allow multiple threads to be able to handle the requests
+
